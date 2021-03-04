@@ -1,0 +1,25 @@
+{
+  "name": "nextjs-monorepo-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "build": "yarn workspace @nextjs-monorepo-template/webapp run build",
+    "start": "yarn workspace @nextjs-monorepo-template/api run start",
+    "dev": "yarn workspace @nextjs-monorepo-template/api run dev"
+  },
+  "workspaces": [
+    "api",
+    "webapp"
+  ],
+  "keywords": [
+    "nextjs",
+    "monorepo",
+    "typescript",
+    "graphql",
+    "mongoose"
+  ],
+  "author": "jeshuBrij",
+  "license": "ISC"
+}
