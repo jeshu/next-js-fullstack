@@ -6,13 +6,11 @@ import cors from 'cors';
 
 import createSchema from '../schema';
 import createSession from '../session';
-import nextApp from '@stream-me/app';
+import nextApp from '@nextjs-monorepo-template/webapp';
 
 const port = process.env.PORT || 8000;
 const handle = nextApp.getRequestHandler();
-const corsOptions = {
-  credentials: true,
-};
+
 async function createServer() {
   try {
     // 1. create mongoose connection
