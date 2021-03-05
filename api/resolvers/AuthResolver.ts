@@ -1,7 +1,7 @@
 import {Arg, Mutation, Resolver} from 'type-graphql'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
-import { UserModel } from '../entity/User'
+import { User, UserModel } from '../entity/User'
 import { AuthInput } from '../types/AuthInput'
 import { UserReponse } from '../types/UserResponce'
 
@@ -34,7 +34,7 @@ export class AuthResolver {
   async login(@Arg('input') {email, password}:AuthInput
   ): Promise<UserReponse> {
 
-    const existing = await UserModel.findOne({ email})
+    const existing = await UserModel.findOne({ email}) as User
     const valid = await bcrypt.compare(password, existing.password)
     
     if(!valid) {

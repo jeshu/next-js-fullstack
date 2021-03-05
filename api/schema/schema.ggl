@@ -43,8 +43,8 @@ input StreamInput {
 }
 
 type User {
-  _id: ObjectId!
   email: String!
+  id: ObjectId!
 }
 
 type UserReponse {
