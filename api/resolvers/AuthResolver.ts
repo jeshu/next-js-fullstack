@@ -1,7 +1,7 @@
 import {Arg, Mutation, Resolver} from 'type-graphql'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
-import { User, UserModel } from '../entity/User'
+import {UserModel } from '../entity/User'
 import { AuthInput } from '../types/AuthInput'
 import { UserReponse } from '../types/UserResponce'
 
@@ -23,7 +23,7 @@ export class AuthResolver {
     await user.save()
 
     const payload = {
-      id: user._id,
+      id: user.id,
     }
 
     const token = jwt.sign(payload, process.env.SESSION_SECRET || 'abcd963258')
@@ -34,15 +34,17 @@ export class AuthResolver {
   async login(@Arg('input') {email, password}:AuthInput
   ): Promise<UserReponse> {
 
-    const existing = await UserModel.findOne({ email}) as User
+    const existing = await UserModel.findOne({ email}) as any;
     const valid = await bcrypt.compare(password, existing.password)
     
     if(!valid) {
       throw new Error('Invalid login')
     }
 
+    console.log('existing')
+
     const payload = {
-      id: existing.id,
+      id: existing._id,
     }
 
     const token = jwt.sign(payload, process.env.SESSION_SECRET || 'abcd963258')
