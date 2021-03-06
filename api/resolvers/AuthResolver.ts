@@ -23,7 +23,7 @@ export class AuthResolver {
     await user.save()
 
     const payload = {
-      id: user.id,
+      id: user._id,
     }
 
     const token = jwt.sign(payload, process.env.SESSION_SECRET || 'abcd963258')
